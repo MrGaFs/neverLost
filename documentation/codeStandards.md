@@ -3,6 +3,9 @@
 
 * Use tabs to indetation not spaces 
 
+* make commit massage helpful for the merger
+
+
 ## naming
 
 * Naming variables will start with a letter (uppercase if the variable is global and lower if it's local) that show the date type of the
