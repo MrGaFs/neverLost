@@ -1,4 +1,5 @@
 # neverLost Project code standards
+
 ## General
 
 * Use tabs to indetation not spaces 
@@ -13,14 +14,10 @@ variable as in the following table
 
 | Datatype | letter |
 | :------: | :----: |
-|   int    |   n    |
-|   long   |   l    |
-|  float   |   f    |
-|  double  |   d    |
-|  string  |   s    |
-|   char   |   c    |
-|   bool   |   b    |
-|  object  |   o    |
+|  number  |   n    |
+| Boolean  |   b    |
+|  String  |   s    |
+|   void   |   v    |
 
 * After putting the char every word in the variable name will start with Uppercase 
 character for example :- ( lNumberOfLostKids )
@@ -60,13 +57,15 @@ character for example :- ( lNumberOfLostKids )
 // TODO: 
 ```
 
-* If there is a bug or and error in any snippets of code please put Warning or FIXME comment 
+* If there is a bug or an error in any snippets of code please put Bug or FIXME comment 
 
 ```c++
-//WARNING:
-//FIXME:
+// BUG:
+// FIXME:
 ```
+
 * Before any function add comment like this to make editors able to help with auto complete 
+
 ```javascript
 /**
  * Returns x raised to the n-th power.
