@@ -75,6 +75,6 @@ character for example :- ( lNumberOfLostKids )
  * @return {number} x raised to the n-th power.
  */
 function pow(x, n) {
-  ...
+
 }
 ```
