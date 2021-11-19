@@ -1,6 +1,6 @@
 # neverLost
 
-## OverView
+## Overview
 
 ### Project Purpose
 
