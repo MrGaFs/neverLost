@@ -20,6 +20,7 @@ model User{
   gender Gender
   phone String @db.VarChar(255)
   email String @db.VarChar(255) @unique
+  address String
   password String @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -28,9 +29,13 @@ model User{
 
 model Ultimate_user{
   id Int @id @default(autoincrement())
+  //user_id Int @db.ForeignKey(User)
   user User @relation(fields: [user_id], references: [id])
   user_id Int
+  //self relationship to make family
   family_admin Ultimate_user @relation("AdminMember", fields: [family_admin_id], references: [id]) 
   family_admin_id Int
   family_members Ultimate_user[] @relation("AdminMember")
+  //Ultimate_user datas
+  medical_history String @db.Text
 }
