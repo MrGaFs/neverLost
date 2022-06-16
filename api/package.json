@@ -18,6 +18,7 @@
     "lint": "eslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
+    "@prisma/client": "^3.15.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "db-migrate": "^0.11.13",
@@ -27,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
     "pg-pool": "^3.5.1",
+    "prisma": "^3.15.2",
     "yarn": "^1.22.18"
   },
   "devDependencies": {
