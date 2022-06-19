@@ -6,14 +6,10 @@
   "author": "MrGAFs",
   "license": "MIT",
   "scripts": {
-    "start": "node src/server.ts",
-    "clean": "rm -rf dist",
-    "build": "yarn clean && npx tsc",
-    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "jasmine": "jasmine",
-    "test": "ENV=test db-migrate --env test up ; ENV=test yarn build ; ENV=test yarn jasmine ; db-migrate --env test down ",
-    "migrate": "db-migrate up",
-    "rollback": "db-migrate down",
+    "build": "chmod +x ./bin/build.sh && ./bin/build.sh",
+    "watch": "chmod +x ./bin/watch.sh && ./bin/watch.sh",
+    "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
+    "migrate": "prisma migrate dev",
     "prettier": "prettier --write 'src/**/*.ts'",
     "lint": "eslint --fix 'src/**/*.ts'"
   },

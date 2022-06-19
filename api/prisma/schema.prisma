@@ -4,11 +4,12 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DB_URL")
 }
 enum Gender{
   male
   female
+  other
 }
 
 model User{
@@ -18,12 +19,13 @@ model User{
   last_name String @db.VarChar(255)
   national_id String @db.VarChar(14) @unique
   gender Gender
-  phone String @db.VarChar(255)
+  phone String @db.VarChar(13)
   email String @db.VarChar(255) @unique
   address String
   password String @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  picture Picture?
   ultimate_user  Ultimate_user?
 }
 
@@ -38,4 +40,11 @@ model Ultimate_user{
   family_members Ultimate_user[] @relation("AdminMember")
   //Ultimate_user datas
   medical_history String @db.Text
+}
+
+model Picture{
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int 
+  Path String
 }

@@ -4,3 +4,10 @@ updateAll.sh
 node_modules/
 
 .env
+
+setenv.sh
+
+.gitignore
+.*ignore
+app.yaml
+dist/
