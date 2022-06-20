@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import users, { Gender } from "../models/Users";
+import jwt, { verify } from 'jsonwebtoken';
+import config from "../config";
 
 
 describe("Testing models", () => {
@@ -47,7 +48,7 @@ describe("Testing models", () => {
 				phone: 'number',
 				email: 'test1@test.com',
 				address: 'tes1t adres',
-		}]
+		}];
 
 
 		it("listing all users when empty", async () => {
@@ -55,12 +56,20 @@ describe("Testing models", () => {
 			expect(res).toEqual([]);
 		});
 		it("adding user", async () => {
-			const res = await usr.createUser(testUsers[0]);
-			expect(res).toEqual(resUsers[0]);
+			try {
+				const res = await usr.createUser(testUsers[0]);
+				expect(jwt.verify(res, config.JWT_SECRET)).toBeTruthy();
+			}catch(e){
+				throw e;
+			}
 		});
 		it("adding user", async () => {
-			const res = await usr.createUser(testUsers[1]);
-			expect(res).toEqual(resUsers[1]);
+			try {
+				const res = await usr.createUser(testUsers[1]);
+				expect(jwt.verify(res, config.JWT_SECRET)).toBeTruthy();
+			}catch(e){
+				throw e;
+			}
 		});
 
 		it("listing all users after adding", async () => {
@@ -69,8 +78,8 @@ describe("Testing models", () => {
 		});
 
 		it("updating user", async () => {
-			const res = await usr.updateUser(1, {username: "test2"});
-			resUsers[0].username = "test2";
+			const res = await usr.updateUser(1, {first_name: "test2"});
+			resUsers[0].first_name = "test2";
 			expect(res).toEqual(resUsers[0]);
 		});
 
@@ -78,6 +87,14 @@ describe("Testing models", () => {
 			const res = await usr.deleteUser(2);
 			expect(res).toEqual(resUsers[1]);
 		});
+
+		it("Login", async () => {
+			const res = await usr.login(testUsers[0].username, testUsers[0].password);
+			if (res) {
+				expect(jwt.verify(res, config.JWT_SECRET)).toBeTruthy();
+			} else throw Error("Login failed");
+		});
+
 
 	});
 });
