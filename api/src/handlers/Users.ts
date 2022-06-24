@@ -23,7 +23,7 @@ const createUser = async (req: express.Request, res: express.Response) => {
 		};
 		const schemaResult = joi.validate(req.body, userSchema);
 		if (schemaResult.error) {
-			throw Error('Data is incomplete');
+			throw Error(schemaResult.error);
 		}
 		const ret = await usr.createUser({
 			username: userSchema.username, first_name: userSchema.first_name, last_name: userSchema.last_name,
