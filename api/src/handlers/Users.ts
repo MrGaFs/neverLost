@@ -9,7 +9,7 @@ const usr = new users();
 
 const createUser = async (req: express.Request, res: express.Response) => {
 	try {
-		const schema = {
+		const userSchema = {
 			username: joi.string().required(),
 			first_name: joi.string().required(),
 			last_name: joi.string().required(),
@@ -21,16 +21,14 @@ const createUser = async (req: express.Request, res: express.Response) => {
 			address: joi.string(),
 			password: joi.string().required(),
 		};
-		const schemaResult = joi.validate(req.body, schema);
+		const schemaResult = joi.validate(req.body, userSchema);
 		if (schemaResult.error) {
 			throw Error('Data is incomplete');
 		}
-		// if (!(username && first_name && last_name && national_id && user_type && gender
-		// 	&& phone && email && address && password))
 		const ret = await usr.createUser({
-			username: schema.username, first_name: schema.first_name, last_name: schema.last_name,
-			national_id: schema.national_id,user_type:schema.user_type, gender: schema.gender, phone: schema.phone, email: schema.email,
-			address: schema.address, password: schema.password
+			username: userSchema.username, first_name: userSchema.first_name, last_name: userSchema.last_name,
+			national_id: userSchema.national_id,user_type:userSchema.user_type, gender: userSchema.gender, phone: userSchema.phone, email: userSchema.email,
+			address: userSchema.address, password: userSchema.password
 		})
 		res.status(200).json({"token":ret});
 	}
