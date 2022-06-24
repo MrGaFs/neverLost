@@ -25,10 +25,22 @@ const createUser = async (req: express.Request, res: express.Response) => {
 		if (schemaResult.error) {
 			throw Error('Data is incomplete');
 		}
+		const {
+			username,
+			first_name,
+			last_name,
+			national_id,
+			user_type,
+			gender,
+			phone,
+			email,
+			address,
+			password,
+		} = req.body;
 		const ret = await usr.createUser({
-			username: userSchema.username, first_name: userSchema.first_name, last_name: userSchema.last_name,
-			national_id: userSchema.national_id,user_type:userSchema.user_type, gender: userSchema.gender, phone: userSchema.phone, email: userSchema.email,
-			address: userSchema.address, password: userSchema.password
+			username: username, first_name: first_name, last_name: last_name,
+			national_id: national_id,user_type:user_type, gender: gender, phone: phone, email: email,
+			address: address, password: password
 		})
 		res.status(200).json({"token":ret});
 	}
