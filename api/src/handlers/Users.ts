@@ -10,30 +10,18 @@ const usr = new users();
 const createUser = async (req: express.Request, res: express.Response) => {
 	try {
 		const userSchema = Joi.object({
-			username: joi.string().required(),
-			first_name: joi.string().required(),
-			last_name: joi.string().required(),
-			national_id: joi.string().required(),
-			user_type: joi.string(),
-			gender: joi.string().required(),
-			phone: joi.string().required(),
-			email: joi.string().required(),
-			address: joi.string(),
-			password: joi.string().required(),
-<<<<<<< HEAD
+			username: Joi.string().required(),
+			first_name: Joi.string().required(),
+			last_name: Joi.string().required(),
+			national_id: Joi.string().required(),
+			user_type: Joi.string(),
+			gender: Joi.string().required(),
+			phone: Joi.string().required(),
+			email: Joi.string().required(),
+			address: Joi.string(),
+			password: Joi.string().required(),
 		});
-		try {
-			const schemaResult = await userSchema.validateAsync(req.body);
-		}
-		catch (e) {
-			throw e;
-=======
-		};
-		const schemaResult = joi.validate(req.body, userSchema);
-		if (schemaResult.error) {
-			throw Error(schemaResult.error);
->>>>>>> Abdelrahman
-		}
+		await userSchema.validateAsync(req.body);
 		const {
 			username,
 			first_name,
