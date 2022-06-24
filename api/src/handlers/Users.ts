@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import jwtAuth from '../middleware/jwtatuh';
 import config from '../config';
 import Joi from 'joi';
-const joi = require('../../node_modules/joi')
 
 const usr = new users();
 
@@ -21,12 +20,19 @@ const createUser = async (req: express.Request, res: express.Response) => {
 			email: joi.string().required(),
 			address: joi.string(),
 			password: joi.string().required(),
+<<<<<<< HEAD
 		});
 		try {
 			const schemaResult = await userSchema.validateAsync(req.body);
 		}
 		catch (e) {
 			throw e;
+=======
+		};
+		const schemaResult = joi.validate(req.body, userSchema);
+		if (schemaResult.error) {
+			throw Error(schemaResult.error);
+>>>>>>> Abdelrahman
 		}
 		const {
 			username,
