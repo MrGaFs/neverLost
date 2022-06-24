@@ -1,4 +1,4 @@
-import users, { Gender } from "../models/Users";
+import users, { Gender, userType } from "../models/Users";
 import jwt, { verify } from 'jsonwebtoken';
 import config from "../config";
 
@@ -12,8 +12,9 @@ describe("Testing models", () => {
 				first_name: "testfn",
 				last_name: "testln",
 				national_id: "testni",
+				user_type: userType.normal,
 				gender: Gender.female,
-				phone: '01006001937',
+				phone: 'number2',
 				email: 'test@test.com',
 				address: 'test adres',
 				password: 'test password'
@@ -22,6 +23,7 @@ describe("Testing models", () => {
 				first_name: "testfn1",
 				last_name: "testln1",
 				national_id: "testni1",
+				user_type: userType.normal,
 				gender: Gender.male,
 				phone: 'number',
 				email: 'test1@test.com',
@@ -34,8 +36,9 @@ describe("Testing models", () => {
 				first_name: "testfn",
 				last_name: "testln",
 				national_id: "testni",
+				user_type: userType.normal,
 				gender: Gender.female,
-				phone: '01006001937',
+				phone: 'number2',
 				email: 'test@test.com',
 				address: 'test adres',
 		}, {
@@ -44,6 +47,7 @@ describe("Testing models", () => {
 				first_name: "testfn1",
 				last_name: "testln1",
 				national_id: "testni1",
+				user_type: userType.normal,
 				gender: Gender.male,
 				phone: 'number',
 				email: 'test1@test.com',
@@ -89,7 +93,7 @@ describe("Testing models", () => {
 		});
 
 		it("Login", async () => {
-			const res = await usr.login(testUsers[0].username, testUsers[0].password);
+			const res = await usr.login(testUsers[0].national_id, testUsers[0].password);
 			if (res) {
 				expect(jwt.verify(res, config.JWT_SECRET)).toBeTruthy();
 			} else throw Error("Login failed");

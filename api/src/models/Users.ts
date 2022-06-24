@@ -4,11 +4,23 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../config.js';
 
+export enum userType {
+	normal = 'normal',
+	ultimate = 'ultimate'
+}
+
+export enum Gender {
+	male = "male",
+	female = "female",
+	other = "other"
+}
+
 export type User = {
 	username: string
 	first_name: string
 	last_name: string
 	national_id: string
+	user_type: userType 
 	gender: Gender
 	phone: string
 	email: string
@@ -22,14 +34,10 @@ const returnedUser = {
 	last_name: true,
 	national_id: true,
 	gender: true,
+	user_type:true, 
 	phone: true,
 	email: true,
 	address: true,
-}
-export enum Gender {
-	male = "male",
-	female = "female",
-	other = "other"
 }
 
 const bcrypt_salt = config.BCRYPT_SALT, bcrypt_rounds = config.BCRYPT_ROUNDS;
@@ -59,9 +67,9 @@ class users {
 			const chUser = { ...user };
 			chUser.password = await hashPass(chUser.password);
 			const res = await prisma.user.create({
-				data: chUser, select: {id:true, national_id:true}
+				data: chUser, select: {id:true, national_id:true, user_type:true}
 			})
-			return jwt.sign({ id: res.id, email: res.national_id }, config.JWT_SECRET);
+			return jwt.sign({ id: res.id, national_id: res.national_id, user_type:res.user_type}, config.JWT_SECRET);
 		} catch (e) {
 			throw e;
 		}
@@ -91,13 +99,14 @@ class users {
 			const res = await prisma.user.findUnique({
 				where: {
 					national_id: national_id,
-				}, select: { id: true, national_id: true, password: true }
+				}, select: { id: true, national_id: true, user_type: true, password: true }
 			});
 			const isValid = (res) ? await bcrypt.compare(password + bcrypt_salt, res.password) : false;
 			if (res && isValid) {
 				return jwt.sign({
 					id: res.id,
 					national_id: res.national_id,
+					user_type: res.user_type
 				}, config.JWT_SECRET);
 			}
 			else return null;

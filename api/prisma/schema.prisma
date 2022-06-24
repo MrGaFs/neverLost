@@ -6,6 +6,12 @@ datasource db {
   provider = "postgresql"
   url      = env("DB_URL")
 }
+
+enum UserTypes{
+  normal
+  ultimate
+}
+
 enum Gender{
   male
   female
@@ -19,6 +25,7 @@ model User{
   last_name String @db.VarChar(255)
   national_id String @db.VarChar(14) @unique
   gender Gender
+  user_type UserTypes 
   phone String @db.VarChar(13)
   email String @db.VarChar(255) @unique
   address String

@@ -12,21 +12,22 @@ const createUser = async (req: express.Request, res: express.Response) => {
 			first_name,
 			last_name,
 			national_id,
+			user_type,
 			gender,
 			phone,
 			email,
 			address,
 			password,
 		} = req.body;
-		if (!(username && first_name && last_name && national_id && gender
+		if (!(username && first_name && last_name && national_id && user_type && gender
 			&& phone && email && address && password))
 			throw Error('Data is incomplete');
 		const ret = await usr.createUser({
 			username: username, first_name: first_name, last_name: last_name,
-			national_id: national_id, gender: gender, phone: phone, email: email,
+			national_id: national_id,user_type:user_type, gender: gender, phone: phone, email: email,
 			address: address, password: password
 		})
-		res.status(200).json(ret);
+		res.status(200).json({"token":ret});
 	}
 	catch (e) {
 		res.status(500).json({ 'error': (e as Error).message });
@@ -49,7 +50,7 @@ const getUserInfo = async (req: express.Request, res: express.Response) => {
 const login = async (req: express.Request, res: express.Response) => {
 	try {
 		const { national_id, password } = req.body;
-		res.status(200).json(await usr.login(national_id, password));
+		res.status(200).json({'token':await usr.login(national_id, password)});
 	} catch (e) {
 		res.status(500).json({ 'error': (e as Error).message });
 	}
