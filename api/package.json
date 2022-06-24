@@ -1,0 +1,51 @@
+{
+  "name": "never-lost-api",
+  "version": "0.1.0",
+  "description": "never lost graduation project api",
+  "main": "server.ts",
+  "author": "MrGAFs",
+  "license": "MIT",
+  "scripts": {
+    "build": "chmod +x ./bin/build.sh && ./bin/build.sh",
+    "watch": "chmod +x ./bin/watch.sh && ./bin/watch.sh",
+    "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
+    "migrate": "prisma migrate dev",
+    "prettier": "prettier --write 'src/**/*.ts'",
+    "lint": "eslint --fix 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.15.2",
+    "@types/multer": "^1.4.7",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.5-lts.1",
+    "prisma": "^3.15.2",
+    "yarn": "^1.22.18"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.9",
+    "@types/jasmine": "^4.0.3",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^4.1.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
+    "pg-client": "^0.0.5",
+    "prettier": "^2.6.2",
+    "supertest": "^6.2.3",
+    "ts-node": "^9.1.1",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.1.3"
+  }
+}
