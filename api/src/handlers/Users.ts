@@ -3,29 +3,32 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import jwtAuth from '../middleware/jwtatuh';
 import config from '../config';
+const joi = require('../../node_modules/joi')
 
 const usr = new users();
 
 const createUser = async (req: express.Request, res: express.Response) => {
 	try {
-		const { username,
-			first_name,
-			last_name,
-			national_id,
-			user_type,
-			gender,
-			phone,
-			email,
-			address,
-			password,
-		} = req.body;
-		if (!(username && first_name && last_name && national_id && user_type && gender
-			&& phone && email && address && password))
+		const userSchema = {
+			username: joi.string().required(),
+			first_name: joi.string().required(),
+			last_name: joi.string().required(),
+			national_id: joi.string().required(),
+			user_type: joi.string(),
+			gender: joi.string().required(),
+			phone: joi.string().required(),
+			email: joi.string().required(),
+			address: joi.string(),
+			password: joi.string().required(),
+		};
+		const schemaResult = joi.validate(req.body, userSchema);
+		if (schemaResult.error) {
 			throw Error('Data is incomplete');
+		}
 		const ret = await usr.createUser({
-			username: username, first_name: first_name, last_name: last_name,
-			national_id: national_id,user_type:user_type, gender: gender, phone: phone, email: email,
-			address: address, password: password
+			username: userSchema.username, first_name: userSchema.first_name, last_name: userSchema.last_name,
+			national_id: userSchema.national_id,user_type:userSchema.user_type, gender: userSchema.gender, phone: userSchema.phone, email: userSchema.email,
+			address: userSchema.address, password: userSchema.password
 		})
 		res.status(200).json({"token":ret});
 	}
