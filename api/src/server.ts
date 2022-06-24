@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import config from './config';
 import bodyparser from 'body-parser';
 import UserRouter from './handlers/Users';
+import testy from './testimgupload';
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,7 @@ app.get('/', (_req, res) => {
 });
 
 UserRouter(app);
+testy(app);
 
 app.listen(port, () => {
 	console.log(`Server is listening on port ${port}`);
