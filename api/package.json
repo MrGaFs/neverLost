@@ -6,6 +6,7 @@
   "author": "MrGAFs",
   "license": "MIT",
   "scripts": {
+    "start":"npm run build && node ./dist/server.js",
     "build": "chmod +x ./bin/build.sh && ./bin/build.sh",
     "watch": "chmod +x ./bin/watch.sh && ./bin/watch.sh",
     "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
