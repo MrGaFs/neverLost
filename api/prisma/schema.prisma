@@ -9,7 +9,8 @@ datasource db {
 
 enum UserTypes{
   normal
-  ultimate
+  family_admin
+  family_member
 }
 
 enum Gender{
