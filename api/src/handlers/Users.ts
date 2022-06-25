@@ -13,10 +13,10 @@ const createUser = async (req: express.Request, res: express.Response) => {
 			username: Joi.string().required(),
 			first_name: Joi.string().required(),
 			last_name: Joi.string().required(),
-			national_id: Joi.string().min(14).max(14).regex(/^\d+$/).required(),
+			national_id: Joi.string().regex(/\d{14}/).required(),
 			user_type: Joi.string(),
 			gender: Joi.string().required(),
-			phone: Joi.string().min(11).max(11).regex(/^\d+$/).required(),
+			phone: Joi.string().regex(/^\+20\d{10}$/).required(),
 			email: Joi.string().required(),
 			address: Joi.string(),
 			password: Joi.string().required(),
@@ -62,7 +62,7 @@ const getUserInfo = async (req: express.Request, res: express.Response) => {
 const login = async (req: express.Request, res: express.Response) => {
 	try {
 		const testLoginData = Joi.object({
-			national_id: Joi.string().min(14).max(14).regex(/^\d+$/).required(),
+			national_id: Joi.string().regex(/\d{14}/).required(),
 			password: Joi.string().required(),
 		});
 		await testLoginData.validateAsync(req.body);
