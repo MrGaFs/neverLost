@@ -4,61 +4,70 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DB_URL")
 }
 
-model Picture {
-  id      Int    @id @default(autoincrement())
-  user_id Int    @unique
-  Path    String
-  User    User   @relation(fields: [user_id], references: [id])
-  feed Feed?
+enum UserTypes{
+  normal
+  ultimate
 }
 
-model Ultimate_user {
-  id                  Int             @id @default(autoincrement())
-  user_id             Int             @unique
-  family_admin_id     Int
-  medical_history     String
-  Ultimate_user       Ultimate_user   @relation("Ultimate_userToUltimate_user_family_admin_id", fields: [family_admin_id], references: [id])
-  User                User            @relation(fields: [user_id], references: [id])
-  other_Ultimate_user Ultimate_user[] @relation("Ultimate_userToUltimate_user_family_admin_id")
-}
-
-model User {
-  id            Int            @id @default(autoincrement())
-  username      String         @unique @db.VarChar(255)
-  first_name    String         @db.VarChar(255)
-  last_name     String         @db.VarChar(255)
-  national_id   String         @unique @db.VarChar(14)
-  gender        Gender
-  phone         String         @db.VarChar(13)
-  email         String         @unique @db.VarChar(255)
-  password      String         @db.VarChar(255)
-  created_at    DateTime       @default(now())
-  updated_at    DateTime
-  address       String
-  Picture       Picture?
-  Ultimate_user Ultimate_user?
-}
-
-enum Gender {
+enum Gender{
   male
   female
   other
 }
 
+model User{
+  id Int @id @default(autoincrement())
+  username String @unique @db.VarChar(255)
+  first_name String @db.VarChar(255)
+  last_name String @db.VarChar(255)
+  national_id String @db.VarChar(14) @unique
+  gender Gender
+  user_type UserTypes 
+  phone String @db.VarChar(13)
+  email String @db.VarChar(255) @unique
+  address String
+  password String @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  picture Picture?
+  ultimate_user  Ultimate_user?
+}
+
+model Ultimate_user{
+  id Int @id @default(autoincrement())
+  //user_id Int @db.ForeignKey(User)
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int
+  //self relationship to make family
+  family_admin Ultimate_user @relation("AdminMember", fields: [family_admin_id], references: [id]) 
+  family_admin_id Int
+  family_members Ultimate_user[] @relation("AdminMember")
+  //Ultimate_user datas
+  medical_history String @db.Text
+}
+
+model Picture{
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int 
+  Path String
+	feed Feed?
+}
+
 model Report {
-  id			Int			@id @default(autoincrement())
-  lost_num		Int             
-  location		String		@db.VarChar(255)
-  gender		Gender
-  age			Int
+	id			Int			@id @default(autoincrement())
+	lost_num		Int             
+	location		String		@db.VarChar(255)
+	gender		Gender
+	age			Int
 }
 
 model Feed {
 	id			Int			@id @default(autoincrement())
-  Description	String
-  pic_id Int
-  pic 			Picture		@relation(fields: [pic_id],references: [id] )
+	Description	String
+	pic_id Int
+	pic 			Picture		@relation(fields: [pic_id],references: [id] )
 }
