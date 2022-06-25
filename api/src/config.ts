@@ -15,5 +15,5 @@ const config:ConfigType = {
 	BCRYPT_ROUNDS: parseInt(process.env.BCRYPT_SALT_ROUNDS as string),
 	BCRYPT_SALT: process.env.BCRYPT_SALT as string,
 	JWT_SECRET: process.env.JWT_SECRET as string,
-}
+};
 export default config;

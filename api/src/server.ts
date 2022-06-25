@@ -15,7 +15,7 @@ app.get('/', (_req, res) => {
 		<h1>NeverLost Api v0</h1>
 		<h2>Welcome to the API</h2>
 		<h2>Under construction</h2>
-		`)
+		`);
 });
 
 UserRouter(app);
