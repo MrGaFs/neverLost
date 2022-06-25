@@ -79,4 +79,5 @@ model Feed {
 	Description	String
 	pic_id Int
 	pic 			Picture		@relation(fields: [pic_id],references: [id] )
+  
 }
