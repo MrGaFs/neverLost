@@ -11,3 +11,5 @@ setenv.sh
 .*ignore
 app.yaml
 dist/
+
+.vscode/
