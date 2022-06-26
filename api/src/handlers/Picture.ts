@@ -17,7 +17,9 @@ const pic = new Picture();
 const getPicture = async (req: express.Request, res: express.Response) => {
 	try {
 		const ret = await pic.getPicture(parseInt(req.params.id as string));
-		res.status(200).json(ret);
+		if(!ret)
+			throw new Error('No picture');
+		res.status(200).sendFile(ret.path);
 	} catch (e) {
 		res.status(500).send((e as Error).message);
 	}
