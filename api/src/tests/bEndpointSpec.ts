@@ -19,10 +19,10 @@ describe('Testing Main api page', () => {
 				username: 'test1',
 				first_name: 'testfn',
 				last_name: 'testln',
-				national_id: 'testni122',
+				national_id: '12345678901234',
 				user_type: 'normal',
 				gender:'female',
-				phone: 'number21',
+				phone: '+201234567890',
 				email: 'test@test.com1',
 				address: 'test adres',
 				password: 'test password'
@@ -32,7 +32,7 @@ describe('Testing Main api page', () => {
 		});
 		it('Testing POST /login', async () => {
 			const response = await request.post('/login').send({
-				national_id: 'testni1',
+				national_id: '12345678901234',
 				password: 'test password'
 			});
 			expect(jwt.verify(response.body.token, config.JWT_SECRET)).toBeTruthy();
@@ -45,10 +45,10 @@ describe('Testing Main api page', () => {
 				username: 'test1',
 				first_name: 'testfn',
 				last_name: 'testln',
-				national_id: 'testni122',
+				national_id: '12345678901234',
 				user_type: 'normal',
 				gender:'female',
-				phone: 'number21',
+				phone: '+201234567890',
 				email: 'test@test.com1',
 				address: 'test adres',
 			}

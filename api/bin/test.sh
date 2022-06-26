@@ -1,7 +1,7 @@
 #! /bin/sh
 
 echo "Migrating datebase..." &&\
-npx prisma migrate dev --name $(date +%Y%m%d%H%M%S) > /dev/null && \
+npx prisma migrate deploy > /dev/null && \
 echo "start testing..." &&\
 npx tsc &&\
 ENV=test &&\
