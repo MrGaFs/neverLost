@@ -92,34 +92,34 @@ describe('Testing models', () => {
 			} else throw Error('Login failed');
 		});
 	});
-});
-describe('Testing Family Admin', () => {
-	const admin = new FamilyAdmin();
-	beforeAll(async () => {
-		const usr = new users();
-		const promises: Promise<string>[] = [];
-		for (let i = 0; i < 5; i++) {
-			promises.push(usr.createUser({
-				username: `testss${i}`,
-				first_name: `testfn${i}`,
-				last_name: `testln${i}`,
-				national_id: `testni${i}`,
-				user_type: userType.normal,
-				gender: Gender.male,
-				email: `testemail${i}@neverlost.com`,
-				phone: `01${i}${i}000000`,
-				password: 'test password',
-				address: 'adflkafdjalk',
-			}));
-			await Promise.all(promises);
-		}
-	});
-	it('listing all users when empty', async () => {
-		// const res = await admin.getFamilyAdmins();
-		// expect(res).toEqual([]);
-	});
+	describe('Testing Family Admin', () => {
+		const admin = new FamilyAdmin();
+		beforeAll(async () => {
+			const usr = new users();
+			const promises: Promise<string>[] = [];
+			for (let i = 0; i < 5; i++) {
+				promises.push(usr.createUser({
+					username: `testss${i}`,
+					first_name: `testfn${i}`,
+					last_name: `${i}${i}${i}${i}1234567890`,
+					national_id: `testni${i}`,
+					user_type: userType.normal,
+					gender: Gender.male,
+					email: `testemail${i}@neverlost.com`,
+					phone: `01${i}${i}000000`,
+					password: 'test password',
+					address: 'adflkafdjalk',
+				}));
+				await Promise.all(promises);
+			}
+		});
+		it('listing all users when empty', async () => {
+			const res = await admin.getFamilyAdmins();
+			expect(res).toEqual([]);
+		});
 
-	it('Adding Admin', async () => {
-		// const res = await admin.createFamilyAdmin({ });
+		it('Adding Admin', async () => {
+			// const res = await admin.createFamilyAdmin({ });
+		});
 	});
 });
