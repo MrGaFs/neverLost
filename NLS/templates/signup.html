@@ -1,0 +1,126 @@
+{% extends 'base_layout.html' %}
+{% block body %}
+<!-- Section: Design Block -->
+<section class="text-center">
+   <!-- Background image -->
+   <div class="p-5 bg-image" style="
+      background-image: url('https://raw.githubusercontent.com/Rowida46/My-Reading-List/main/LogoTop.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      width: 100%;
+      height: 250px;
+      ">
+   </div>
+   <!-- Background image -->
+   <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+      margin-top: -100px;
+      background: hsla(0, 0%, 100%, 0.8);
+      backdrop-filter: blur(30px);">
+
+   <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+         <div class="col-lg-8">
+            <h2>Sign up now</h2>
+            <form  method="POST" action="" class="signup" >
+               <!-- User Name -->
+               <div class="signup__field row">
+                  <div class="col-md-6 mb-4">
+                     <div class="">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" name="fn" class="signin_input" value="{{ first }}" 
+                         placeholder="Your First Name" />
+                     </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                     <div class="">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" name="ln"class="signin_input"  value="{{ last }}" 
+                        placeholder="Last Name" />
+                     </div>
+                  </div>
+               </div>
+               <!-- Email -->
+               <div class="signup__field">
+                  <i class="login__icon fas fa-at"></i>
+                  <input type="text" name="email_" name="email" value="{{ email }}" 
+                   class="signin_input" placeholder="Enter your Email">
+               </div>
+               <!-- National ID -->
+               <div class="signup__field">
+                  <i class="login__icon fa fa-address-card"></i>
+                  <input type="number" name="national_id" size="12" class="signin_input" placeholder="Enter your National ID">
+               </div>
+               <!-- Gender -->
+               <div class="signup__field">
+                  <i class=" login__icon fa fa-mars-and-venus"></i>
+                  <select name="gender_" class="signin_input" aria-label="Default select example ">
+                    <option selected>Gender Selection</option>
+                    <option value="1">Femal</option>
+                    <option value="2">Male</option>
+                  </select>
+               </div>
+               <!-- Number -->
+               <div class="signup__field">
+                  <i class="login__icon fas fa-phone-alt"></i>
+                  <input type="tel" name="number" size="12" class="signin_input" placeholder="Enter your Number">
+               </div>
+               <!-- birth date -->
+               <div class="signup__field">
+                  <i class="login__icon fa fa-calendar-days"></i>
+                  <input type="date" name="birthdate" class="signin_input" value="2018-07-22"
+                     max="2000-1-1">
+               </div>
+                <!-- Password -->
+               <div class="signup__field">
+                  <i class="login__icon fas fa-lock"></i>
+                  <input type="password" name="password" class="signin_input" placeholder="Enter your Password">
+               </div>
+               <!-- payment -->
+               {% if  session['id']  == '2' or session['id'] == '3'  %}
+               <div class="signup__field">
+                  <i class=" login__icon fa fa-mars-and-venus"></i>
+                  <select name="payment_mth" class="signin_input" aria-label="Default select example ">
+                    <option selected>Payment Getaway Selection</option>
+                    <option value="1">visa</option>
+                    <option value="2">cash</option>
+                  </select>
+               </div>
+               <!-- payment  getaway-->
+               <div class="signup__field ">
+                  <button id="upload" class="uploadimg btn btn-outline-secondary">
+                     <label  for="upload">Upgrade
+                     <i class=" fa fa-money-check"></i></label>
+
+                  </button>
+               </div>
+               {% endif %}
+               <!-- Privcy terms -->
+               <div class="signup__field">
+                  <label class="signup__field checkbox">
+                  <input type="checkbox" title="Access GPS location"value="TRUE">
+                  <a href="#">Accept Privacy Terms</a> and access your location.
+                  </label>
+               </div>
+               <button class="button login__submit">
+                  <span class="button__text">Sign Up</span>
+                  <i class="button__icon fas fa-chevron-right"></i>
+               </button>
+            </form>
+            <h3>Sign Up Via</h3>
+            <div class=" d-flex justify-content-center text-center mt-4 pt-1">
+               <div class="social-icons">
+                  <a href="/google/" class="social-login__icon fab fa-google-plus-g"></a>
+                  <a href="#" class="social-login__icon fab fa-facebook"></a>
+               </div>
+            </div>
+            <div>
+               <p class="mb-0">Already Registered ? <a href="/login" class="text-white-50 fw-bold">Log In</a>
+               </p>
+            </div>
+         </div>
+      </div>
+</div>
+</div></section>   
+<!-- Section: Design Block -->   
+{% endblock %}

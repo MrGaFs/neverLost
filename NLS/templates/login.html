@@ -1,0 +1,64 @@
+{% extends 'base_layout.html' %}
+{% block body %}
+   <!-- Section: Design Block -->
+<section class="text-center">
+   <!-- Background image -->
+   <div class="p-5 bg-image" style="
+      background-image: url('https://raw.githubusercontent.com/Rowida46/My-Reading-List/main/logo.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      width: 100%;
+      height: 250px;
+      ">
+   </div>
+   <!-- Background saturation -->
+   <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+      margin-top: -100px;
+      background: hsla(0, 0%, 100%, 0.8);
+      backdrop-filter: blur(30px);">
+
+      <div class="card-body py-5 px-md-5">
+         <div class="row d-flex justify-content-center">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+               <img src="https://raw.githubusercontent.com/Rowida46/My-Reading-List/main/LogoTop.jpg"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+               <div class="card-body p-4 p-lg-5 text-black">
+                  <h2 class="title-heading">Log In</h2>
+                  <form method="POST" action="">
+                     <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" name="username" class="login__input" placeholder="User name / Email">
+                     </div>
+                     <!-- second field -> password with `id`= password-->
+                     <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" name="password" class="login__input" placeholder="Password">
+                     </div>
+                     <div class="login__field">
+                        <button class="button login__input uploadimg login__submit">
+                         <span class="button__text">Log In Now</span>
+                         <i class="button__icon fas fa-chevron-right"></i>
+                        </button>
+                     </div>
+                  </form>
+                  <h3>Log In Via</h3>
+                  <div class=" d-flex justify-content-center text-center mt-4 pt-1">
+                     <div class="social-icons">
+                        <a href="google/" class="social-login__icon fab fa-google-plus-g"></a>
+                        <a href="#" class="social-login__icon fab fa-facebook"></a>
+                     </div>
+                  </div>
+                  <div>
+                     <p class="mb-0">Not Registered ? <a href="/signup" class="text-white-50 fw-bold">Sign Up</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+</div>
+</section>
+{% endblock %}

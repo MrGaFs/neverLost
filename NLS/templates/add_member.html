@@ -1,0 +1,83 @@
+{% extends 'base_layout.html' %} 
+{% block body %}
+<!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+      background-image: url('https://github.com/Rowida46/NLS/blob/main/img/LogoTop.jpg?raw=true');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      width: 100%;
+      height: 250px;
+      ">
+  </div>
+  <!-- Background image -->
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+      margin-top: -100px;
+      background: hsla(0, 0%, 100%, 0.8);
+      backdrop-filter: blur(30px);">
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2>Add FamilyMember</h2>
+          <form method="POST" action="" class="signup">
+            <!-- User Name -->
+            <div class="signup__field row">
+              <div class="col-md-6 mb-4">
+                <div class="">
+                  <i class="login__icon fas fa-user"></i>
+                  <input type="text" name= "child_first" class="signin_input" placeholder="Enter Child First Name" />
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="">
+                  <i class="login__icon fas fa-user"></i>
+                  <input type="text" name="child_lst" class="signin_input" placeholder="Last Name" />
+                </div>
+              </div>
+            </div>
+            <!-- medical Recoord -->
+            <div class="signup__field">
+              <i class="login__icon fas fa-file-waveform"></i>
+              <input type="text" name="medical_records" class="signin_input" placeholder="Does your child have special medical record?">
+            </div>
+            <!-- Number -->
+            <div class="signup__field">
+              <i class="login__icon fas fa-phone-alt"></i>
+              <input type="tel" name="number" class="signin_input" placeholder="Your child's Number ?">
+            </div>
+            <!-- Password -->
+            <div class="signup__field">
+              <i class="login__icon fas fa-lock"></i>
+              <input type="password"  name="password" class="signin_input" placeholder="Password for your child">
+            </div>
+            <!-- birth date -->
+            <div class="signup__field">
+              <i class="login__icon fa fa-calendar-days"></i>
+              <input type="date"  name="birthdate" class="signin_input" value="2018-07-22" max="2000-1-1">
+            </div>
+            <!-- file -->
+            <div class="signup__field ">
+              <input type="file" name="img" id="upload" hidden/>
+              <label class="uploadimg" for="upload">Upload Image</label>
+            </div>
+            <!-- Privcy terms -->
+            <div class="signup__field">
+              <label class="signup__field checkbox">
+                <input type="checkbox" title="Access GPS location" value="TRUE">
+                <a href="/generate_qr_code">Generate QR Code</a>
+              </label>
+            </div>
+            <button class="button login__submit">
+              <span class="button__text">Add Fmaily Member</span>
+              <i class="button__icon fas fa-chevron-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
+{% endblock %}
