@@ -36,6 +36,7 @@ model User{
   picture Picture?
   Family_Admin Family_Admin?
   Family_member Family_member?
+  user user_repo?
 }
 
 model Family_Admin{
@@ -64,6 +65,7 @@ model Picture{
   user_id Int 
   Path String
 	feed Feed?
+  pic user_repo?
 }
 
 model Report {
@@ -79,5 +81,13 @@ model Feed {
 	Description	String
 	pic_id Int
 	pic 			Picture		@relation(fields: [pic_id],references: [id] )
-  
+
+}
+
+model user_repo{
+  id Int @id @default(autoincrement())
+  user_id Int 
+  pic_id Int
+  pic 			Picture		@relation(fields: [pic_id],references: [id] )
+  user User @relation(fields: [user_id], references: [id])
 }
