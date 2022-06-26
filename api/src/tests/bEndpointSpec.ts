@@ -21,11 +21,11 @@ describe('Testing Main api page', () => {
 				last_name: 'testln',
 				national_id: '12345678901234',
 				user_type: 'normal',
-				gender:'female',
+				gender: 'female',
 				phone: '+201234567890',
 				email: 'test@test.com1',
 				address: 'test adres',
-				password: 'test password'
+				password: 'test password',
 			});
 			expect(response.status).toBe(200);
 			jwtToken = response.body.token;
@@ -33,13 +33,16 @@ describe('Testing Main api page', () => {
 		it('Testing POST /login', async () => {
 			const response = await request.post('/login').send({
 				national_id: '12345678901234',
-				password: 'test password'
+				password: 'test password',
 			});
-			expect(jwt.verify(response.body.token, config.JWT_SECRET)).toBeTruthy();
+			expect(
+				jwt.verify(response.body.token, config.JWT_SECRET)
+			).toBeTruthy();
 		});
 		it('Testing GET /user', async () => {
-			const response = await request.get('/user').
-				set('authorization', `Bearer ${jwtToken}`);
+			const response = await request
+				.get('/user')
+				.set('authorization', `Bearer ${jwtToken}`);
 			expect(response.body).toEqual({
 				id: 8,
 				username: 'test1',
@@ -47,13 +50,11 @@ describe('Testing Main api page', () => {
 				last_name: 'testln',
 				national_id: '12345678901234',
 				user_type: 'normal',
-				gender:'female',
+				gender: 'female',
 				phone: '+201234567890',
 				email: 'test@test.com1',
 				address: 'test adres',
-			}
-			);
-
+			});
 		});
 	});
 });

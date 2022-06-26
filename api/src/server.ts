@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import config from './config';
 import bodyparser from 'body-parser';
 import UserRouter from './handlers/Users';
+import picRouter from './handlers/Picture';
+import FamilyRouter from './handlers/Family';
 
 dotenv.config();
 const app = express();
@@ -19,6 +21,8 @@ app.get('/', (_req, res) => {
 });
 
 UserRouter(app);
+picRouter(app);
+FamilyRouter(app);
 
 app.listen(port, () => {
 	console.log(`Server is listening on port ${port}`);

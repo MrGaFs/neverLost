@@ -43,7 +43,7 @@ model Family_Admin{
   user_id Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  family_members_count Int @default(3) @map("memberCount")
+  membersCount Int @default(3) 
   family_members Family_member[] 
   picture Picture @relation(fields: [picture_id], references: [id])
   picture_id Int
@@ -66,7 +66,7 @@ model Picture{
   id Int @id @default(autoincrement())
   user User @relation(fields: [user_id], references: [id])
   user_id Int 
-  Path String
+  path String
 	feed Feed?
   family_admin Family_Admin?
   family_member Family_member?
