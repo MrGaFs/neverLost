@@ -6,7 +6,8 @@ import config from '../config.js';
 
 export enum userType {
 	normal = 'normal',
-	ultimate = 'ultimate'
+	family_Admin = 'family_admin',
+	family_member = 'family_member',
 }
 
 export enum Gender {

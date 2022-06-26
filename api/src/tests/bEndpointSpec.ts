@@ -1,13 +1,13 @@
-import supertest from "supertest";
+import supertest from 'supertest';
 import jwt from 'jsonwebtoken';
-import app from "../server";
-import config from "../config";
+import app from '../server';
+import config from '../config';
 
-const request = supertest(app)
+const request = supertest(app);
 
-describe("Testing Main api page", () => {
-	it("Testing Get /", async () => {
-		const res = await request.get("/");
+describe('Testing Main api page', () => {
+	it('Testing Get /', async () => {
+		const res = await request.get('/');
 		expect(res.status).toBe(200);
 	});
 
@@ -16,12 +16,12 @@ describe("Testing Main api page", () => {
 	describe('Testing User Endpoint', () => {
 		it('Testing POST /user', async () => {
 			const response = await request.post('/user').send({
-				username: "test1",
-				first_name: "testfn",
-				last_name: "testln",
-				national_id: "testni1",
-				user_type: "normal",
-				gender:"female",
+				username: 'test1',
+				first_name: 'testfn',
+				last_name: 'testln',
+				national_id: 'testni122',
+				user_type: 'normal',
+				gender:'female',
 				phone: 'number21',
 				email: 'test@test.com1',
 				address: 'test adres',
@@ -32,22 +32,22 @@ describe("Testing Main api page", () => {
 		});
 		it('Testing POST /login', async () => {
 			const response = await request.post('/login').send({
-				national_id: "testni1",
+				national_id: 'testni1',
 				password: 'test password'
 			});
-			expect(jwt.verify(jwtToken, config.JWT_SECRET)).toBeTruthy();
+			expect(jwt.verify(response.body.token, config.JWT_SECRET)).toBeTruthy();
 		});
 		it('Testing GET /user', async () => {
 			const response = await request.get('/user').
-			set('authorization', `Bearer ${jwtToken}`);
+				set('authorization', `Bearer ${jwtToken}`);
 			expect(response.body).toEqual({
-				id: 3,
-				username: "test1",
-				first_name: "testfn",
-				last_name: "testln",
-				national_id: "testni1",
-				user_type: "normal",
-				gender:"female",
+				id: 8,
+				username: 'test1',
+				first_name: 'testfn',
+				last_name: 'testln',
+				national_id: 'testni122',
+				user_type: 'normal',
+				gender:'female',
 				phone: 'number21',
 				email: 'test@test.com1',
 				address: 'test adres',
@@ -56,4 +56,4 @@ describe("Testing Main api page", () => {
 
 		});
 	});
-})
+});

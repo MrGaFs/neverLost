@@ -35,7 +35,6 @@ model User{
   updated_at DateTime @updatedAt
   picture Picture?
   Family_Admin Family_Admin?
-  Family_member Family_member?
 }
 
 model Family_Admin{
@@ -46,16 +45,21 @@ model Family_Admin{
   updated_at DateTime @updatedAt
   family_members_count Int @default(3) @map("memberCount")
   family_members Family_member[] 
+  picture Picture @relation(fields: [picture_id], references: [id])
+  picture_id Int
 }
 
 model Family_member{
   id Int @id @default(autoincrement())
-  user User @relation(fields: [user_id], references: [id])
-  user_id Int @unique
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   family_admin Family_Admin @relation(fields: [family_admin_id], references: [id])
   family_admin_id Int
+  medical_record String
+  phone String @db.VarChar(13)
+  email String @db.VarChar(255) @unique
+  picture Picture @relation(fields: [picture_id], references: [id])
+  picture_id Int
 }
 
 model Picture{
@@ -64,11 +68,13 @@ model Picture{
   user_id Int 
   Path String
 	feed Feed?
+  family_admin Family_Admin?
+  family_member Family_member?
 }
 
 model Report {
 	id			Int			@id @default(autoincrement())
-	lost_num		Int             
+	lost_num		Int
 	location		String		@db.VarChar(255)
 	gender		Gender
 	age			Int
