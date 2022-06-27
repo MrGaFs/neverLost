@@ -149,14 +149,6 @@ describe('Testing models', () => {
 				path: 'test path',
 			});
 		});
-		it('getting picture', async () => {
-			const res = await pic.updatePicture(1, 'test path3');
-			expect(res).toEqual({
-				id: 1,
-				user_id: 1,
-				path: 'test path3',
-			});
-		});
 	});
 	describe('Testing Family Admin', () => {
 		const admin = new FamilyAdmin();

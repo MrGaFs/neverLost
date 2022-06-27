@@ -82,7 +82,7 @@ model Report {
 
 model Feed {
 	id			Int			@id @default(autoincrement())
-	Description	String
-	pic_id Int
-	pic 			Picture		@relation(fields: [pic_id],references: [id] )
+	content	String
+	pic 			Picture		@relation(fields: [picture_id],references: [id] )
+	picture_id Int
 }
