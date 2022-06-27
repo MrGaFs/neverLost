@@ -96,4 +96,31 @@ describe('Testing Main api page', () => {
 			});
 		});
 	});
+
+	/*Untill fix picture problem and check the picture model*/
+
+	// describe('Testing Picture Endpoint', () => {
+	// 	it('Testing POST /picture', async () => {
+	// 		const res = await request
+	// 			.post('/picture')
+	// 			.set('Content-Type', `multipart/form-data`)
+	// 			.field('user_id', 7)
+	// 			.attach('picture', 'pic.png');
+	// 		expect(res.status).toBe(200);
+	// 	});
+	// 	it('Testing GET /picture/:id', async () => {
+	// 		const res = await request
+	// 			.get('/picture/');
+	// 		expect(res.status).toBe(200);
+	// 	});
+	// 	it('Testing PUT /picture', async () => {
+	// 		const res = await request
+	// 			.put('/picture')
+	// 			.send({
+	// 				id: 7,
+	// 				path: 'pic2.png',
+	// 			});
+	// 		expect(res.status).toBe(200);
+	// 	});
+	// });
 });
