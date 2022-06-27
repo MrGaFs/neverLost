@@ -33,7 +33,7 @@ model User{
   password String @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  picture Picture?
+  picture Picture[]
   Family_Admin Family_Admin?
 }
 
