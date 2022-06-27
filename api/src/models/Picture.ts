@@ -10,10 +10,10 @@ const selectedData = {
 	path: true,
 };
 class Picture {
-	public async getPicture(user_id: number) {
+	public async getPicture(picture_id: number) {
 		return await prisma.findUnique({
 			where: {
-				user_id: user_id,
+				id: picture_id,
 			},
 			select: selectedData,
 		});
@@ -22,12 +22,6 @@ class Picture {
 		return await prisma.create({
 			data: picture,
 			select: selectedData,
-		});
-	}
-	public async updatePicture(user_id: number, path: string) {
-		return await prisma.update({
-			where: { user_id: user_id },
-			data: { path: path },
 		});
 	}
 }
