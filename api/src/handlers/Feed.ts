@@ -15,6 +15,7 @@ const getAllFeed = async (req: express.Request, res: express.Response) => {
 	}
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createFeed = async (req: express.Request, res: express.Response) => {
 	console.log('placeHolder');
 };
