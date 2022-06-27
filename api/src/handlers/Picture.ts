@@ -39,20 +39,8 @@ const addPicture = async (req: express.Request, res: express.Response) => {
 		res.status(500).send((e as Error).message);
 	}
 };
-const updatePicture = async (req: express.Request, res: express.Response) => {
-	try {
-		if (!(req.body.id && req.body.path))
-			throw new Error('No id or path');
-		const ret = await pic.updatePicture(req.body.id, req.body.path);
-		res.status(200).json(ret);
-	} catch (e) {
-		res.status(500).send((e as Error).message);
-	}
-};
-
 const picRouter = (app: express.Application) => {
 	app.get('/picture/:id', getPicture);
 	app.post('/picture', mult.single('picture'), addPicture);
-	app.put('/picture', updatePicture);
 };
 export default picRouter;
