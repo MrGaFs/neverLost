@@ -56,5 +56,71 @@ describe('Testing Main api page', () => {
 				address: 'test adres',
 			});
 		});
+		it('Testing PUT /user', async () => {
+			const res = await request
+				.put('/user')
+				.set('authorization', `Bearer ${jwtToken}`)
+				.send({
+					username: 'test1au',
+					gender: 'male',
+					email: 'testau@test.com1',
+				});
+			expect(res.body).toEqual({
+				id: 8,
+				username: 'test1au',
+				first_name: 'testfn',
+				last_name: 'testln',
+				national_id: '12345678901234',
+				user_type: 'normal',
+				gender: 'male',
+				phone: '+201234567890',
+				email: 'testau@test.com1',
+				address: 'test adres',
+			});
+		});
+		it('Testing DELETE /user', async () => {
+			const res = await request
+				.delete('/user')
+				.set('authorization', `Bearer ${jwtToken}`);
+			expect(res.body).toEqual({
+				id: 8,
+				username: 'test1au',
+				first_name: 'testfn',
+				last_name: 'testln',
+				national_id: '12345678901234',
+				user_type: 'normal',
+				gender: 'male',
+				phone: '+201234567890',
+				email: 'testau@test.com1',
+				address: 'test adres',
+			});
+		});
 	});
+
+	/*Untill fix picture problem and check the picture model*/
+
+	// describe('Testing Picture Endpoint', () => {
+	// 	it('Testing POST /picture', async () => {
+	// 		const res = await request
+	// 			.post('/picture')
+	// 			.set('Content-Type', `multipart/form-data`)
+	// 			.field('user_id', 7)
+	// 			.attach('picture', 'pic.png');
+	// 		expect(res.status).toBe(200);
+	// 	});
+	// 	it('Testing GET /picture/:id', async () => {
+	// 		const res = await request
+	// 			.get('/picture/');
+	// 		expect(res.status).toBe(200);
+	// 	});
+	// 	it('Testing PUT /picture', async () => {
+	// 		const res = await request
+	// 			.put('/picture')
+	// 			.send({
+	// 				id: 7,
+	// 				path: 'pic2.png',
+	// 			});
+	// 		expect(res.status).toBe(200);
+	// 	});
+	// });
 });
