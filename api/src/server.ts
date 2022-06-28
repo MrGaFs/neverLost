@@ -1,3 +1,13 @@
+// dear Reader and maintainer,
+// At first Only God and I know how this Code is running.
+// Now, Only God knows how this code is still running
+// so if you tried to optimize this code, and failed,
+// please, update the following counter:
+
+// total_optimization_attempts: 1
+// total hours wasted here: 69
+// total_optimization_success: 0
+
 import express from 'express';
 import dotenv from 'dotenv';
 import config from './config';
