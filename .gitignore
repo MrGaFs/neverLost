@@ -12,3 +12,7 @@ setenv.sh
 app.yaml
 dist/
 .vscode/
+
+uploads/
+pic.png
+pic2.jpg
