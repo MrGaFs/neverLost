@@ -19,6 +19,11 @@ enum Gender{
   other
 }
 
+enum Status{
+  active
+  done
+}
+
 model User{
   id Int @id @default(autoincrement())
   username String @unique @db.VarChar(255)
@@ -62,6 +67,7 @@ model Family_member{
   email String @db.VarChar(255) @unique
   picture Picture @relation(fields: [picture_id], references: [id])
   picture_id Int
+  Report Report[]
 }
 
 model Picture{
@@ -94,8 +100,11 @@ model Report{
   user2 User @relation("user2", fields: [targeted_user_id], references: [id])
   user_id Int
   targeted_user_id Int
+  member Family_member @relation(fields: [member_id], references: [id])
+  member_id Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   Latitude String
   Longitude String
+  status Status
 }
