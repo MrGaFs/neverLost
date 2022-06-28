@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient().feed;
-import jwt from 'jsonwebtoken';
-import config from '../config.js';
+
 
 type Feed = {
 	content: string;
@@ -26,11 +25,9 @@ class Feeds {
 	public async createFeed(feed: Feed) {
 		const res = await prisma.create({
 			data: feed,
-			select: { id: true },
+			select:selectedData,
 		});
-		return jwt.sign({
-			id: res.id,
-		}, config.JWT_SECRET);
+		return res ; 
 	}
 }
 

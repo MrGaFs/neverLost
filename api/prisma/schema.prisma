@@ -54,6 +54,8 @@ model Family_Admin{
   family_members Family_member[] 
   picture Picture @relation(fields: [picture_id], references: [id])
   picture_id Int
+  QrCode QrCode[]
+
 }
 
 model Family_member{
@@ -107,4 +109,11 @@ model Report{
   Latitude String
   Longitude String
   status Status
+}
+
+model QrCode{
+  id Int @id @default(autoincrement())
+  admin Family_Admin @relation(fields: [admin_id], references: [id])
+  admin_id Int
+  path String
 }
