@@ -2,6 +2,9 @@ import supertest from 'supertest';
 import jwt from 'jsonwebtoken';
 import app from '../server';
 import config from '../config';
+import path from 'path';
+import fs from 'fs';
+import e from 'express';
 
 const request = supertest(app);
 
@@ -99,28 +102,113 @@ describe('Testing Main api page', () => {
 
 	/*Untill fix picture problem and check the picture model*/
 
-	// describe('Testing Picture Endpoint', () => {
-	// 	it('Testing POST /picture', async () => {
-	// 		const res = await request
-	// 			.post('/picture')
-	// 			.set('Content-Type', `multipart/form-data`)
-	// 			.field('user_id', 7)
-	// 			.attach('picture', 'pic.png');
-	// 		expect(res.status).toBe(200);
-	// 	});
-	// 	it('Testing GET /picture/:id', async () => {
-	// 		const res = await request
-	// 			.get('/picture/');
-	// 		expect(res.status).toBe(200);
-	// 	});
-	// 	it('Testing PUT /picture', async () => {
-	// 		const res = await request
-	// 			.put('/picture')
-	// 			.send({
-	// 				id: 7,
-	// 				path: 'pic2.png',
-	// 			});
-	// 		expect(res.status).toBe(200);
-	// 	});
-	// });
+	describe('Testing Picture Endpoint', () => {
+		it('Testing POST /picture', async () => {
+			const res = await request
+				.post('/picture')
+				.set('Content-Type', `multipart/form-data`)
+				.field('user_id', 7)
+				.attach('picture', fs.readFileSync(path.resolve('./src/tests/pic2.jpg')), 'pic2.jpg');
+			expect(res.status).toBe(200);
+			console.log(res.body);
+		});
+		it('Testing GET /picture/:id', async () => {
+			const res = await request
+				.get('/picture/3');
+			expect(res.status).toBe(200);
+		});
+	});
+
+	describe('Testing Family Admin', () => {
+		it('Testing POST /family/admin', async () => {
+			const res = await request.post('/family/admin')
+				.set('authorization', `Bearer ${jwtToken}`)
+				.send({
+				user_id: 7,
+				membersCount: 3,
+				picture_id: 3,
+			});
+			// console.log(res.body);
+			expect(res.body).toEqual({
+				id: 3,
+				user_id: 7,
+				membersCount: 3,
+				family_members: [],
+				picture_id: 3,
+			});
+		});
+
+		let adminjwttoken = jwt.sign({
+			id: 7,
+		}, config.JWT_SECRET);
+		it('Testing GET /family/admin', async () => {
+			const res = await request
+				.get('/family/admin')
+				.set('authorization', `Bearer ${adminjwttoken}`);
+			expect(res.body).toEqual({
+				user_id: 7,
+				membersCount: 3,
+				family_members: [],
+				picture_id: 3,
+			});
+		});
+		it('Testing PUT /family/admin', async () => {
+			const res = await request
+			.put('/family/admin')
+			.set('authorization', `Bearer ${adminjwttoken}`)
+			.send({
+				membersCount: 2,
+			});
+			expect(res.body).toEqual({
+				id: 3,
+				user_id: 7,
+				membersCount: 2,
+				family_members: [],
+				picture_id: 3,
+			});
+		});
+		let testToken = jwt.sign({
+			id: 3,
+		}, config.JWT_SECRET);
+		it('Testing GET with already intiated account /family/admin', async () => {
+			const res = await request
+				.get('/family/admin')
+				.set('authorization', `Bearer ${testToken}`);
+			expect(res.status).toBe(200);
+			// console.log(res.body);
+		});
+	})
+
+	describe('Testing Family Members', () => {
+		it('Testing POST /family/members', async () => {
+			const res = await request.post('/family/members')
+				.set('authorization', `Bearer ${jwtToken}`)
+				.send({
+					family_admin_id: 3,
+					medical_record: 'testing post api',
+					phone: '+201026027754',
+					email: 'fmtestapi@test.1com',
+					picture_id: 2,
+				});
+			expect(res.status).toBe(200);
+			// console.log(res.body);
+		});
+		it('Testing PUT /family/members', async () => {
+			const res = await request.put('/family/members')
+				.set('authorization', `Bearer ${jwtToken}`)
+				.send({
+					id: 2,
+					medical_record: 'testing put api',
+					email: 'fmputapi@test.1net',
+				});
+			expect(res.body).toEqual({
+				id: 2,
+				family_admin_id: 3,
+				medical_record: 'testing put api',
+				phone: '+201026027754',
+				email: 'fmputapi@test.1net',
+				picture_id: 2,
+			});
+		});
+	})
 });
