@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient().family_member;
-
+import Qr from './QrCode';
+const qr = new Qr();
 type family_member = {
 	family_admin_id: number;
 	medical_record: string;
@@ -21,14 +22,30 @@ class FamilyMember {
 	public async getFamilyMembers(family_admin_id: number) {
 		return await prisma.findMany({
 			where: { family_admin_id: family_admin_id },
-			select: returnedData,
+			select: {
+				...returnedData,
+				QrCode: {
+					select:{id:true, path:true}
+				}
+			},
 		});
 	}
 	public async addFamilyMember(family_member: family_member) {
-		return await prisma.create({
+		const res = await prisma.create({
 			data: family_member,
-			select: returnedData,
+			
+			select: {
+				...returnedData,
+				QrCode: {
+					select:{id:true}
+				}
+			},
 		});
+		const qrcode_id = qr.createQrCode({
+			family_admin_id: res.family_admin_id,
+			member_id: res.id,
+		}, res.id);
+		return (await this.getFamilyMembers(res.family_admin_id));
 	}
 	public async deleteFamilyMember(id: number) {
 		return await prisma.delete({

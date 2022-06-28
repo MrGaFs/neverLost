@@ -230,6 +230,7 @@ describe('Testing models', () => {
 				phone: '0101010101',
 				email: 'test@test.com',
 				picture_id: 1,
+				QrCode:{id:1}
 			}]);
 		});
 	});
