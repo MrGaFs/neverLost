@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient().qrCode;
+const qr = require('qrcode');
 type qrCode = {
 	member_id: number;
 	path: string;
@@ -19,10 +20,11 @@ class QrCode {
 			select: selectedData,
 		});
 	}
-	public async createQrCode(qrcode: qrCode) {
-		return await prisma.create({
-			data: qrcode,
-			select: selectedData,
+	public async createQrCode(data: any) {
+		let strData = JSON.stringify(data);
+		qr.toFile('./qrphotos/filename.png', strData, {}, function (err) {
+			if (err) throw err
+			// console.log('done')
 		});
 	}
 }
