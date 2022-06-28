@@ -54,8 +54,6 @@ model Family_Admin{
   family_members Family_member[] 
   picture Picture @relation(fields: [picture_id], references: [id])
   picture_id Int
-  QrCode QrCode[]
-
 }
 
 model Family_member{
@@ -70,6 +68,7 @@ model Family_member{
   picture Picture @relation(fields: [picture_id], references: [id])
   picture_id Int
   Report Report[]
+  QrCode QrCode?
 }
 
 model Picture{
@@ -113,7 +112,7 @@ model Report{
 
 model QrCode{
   id Int @id @default(autoincrement())
-  admin Family_Admin @relation(fields: [admin_id], references: [id])
-  admin_id Int
+  member Family_member @relation(fields: [member_id], references: [id])
+  member_id Int
   path String
 }
