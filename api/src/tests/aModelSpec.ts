@@ -4,6 +4,7 @@ import config from '../config';
 import FamilyAdmin from '../models/FamilyAdmin';
 import Picture from '../models/Picture';
 import FamilyMember from '../models/FamilyMembers';
+import Report from '../models/report';
 
 describe('Testing models', () => {
 	describe('Testing Users model', () => {
@@ -230,6 +231,41 @@ describe('Testing models', () => {
 				email: 'test@test.com',
 				picture_id: 1,
 			}]);
+		});
+	});
+	describe('Testing Report Model', () => {
+		const report = new Report();
+		it('Testing Creating report', async () => {
+			const res = await report.createReport({
+				user_id: 1,
+				targeted_user_id: 3,
+				Latitude: '30.0',
+				Longitude: '30.0',
+			});
+			expect(res).toEqual({
+				user_id: 1,
+				targeted_user_id: 3,
+				Latitude: '30.0',
+				Longitude: '30.0',
+			});
+		});
+		it('Testing Getting report', async () => {
+			const res = await report.getReport(1);
+			console.log(res);
+			expect(res).toEqual(
+				{
+					user_id: 1,
+					targeted_user_id: 3,
+					Latitude: '30.0',
+					Longitude: '30.0',
+					user: {
+						phone: 'number2',
+						email: 'test@test.com',
+						first_name: 'test2',
+						last_name: 'testln'
+					}
+				}
+			);
 		});
 	});
 });

@@ -34,6 +34,8 @@ model User{
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   picture Picture[]
+  Report Report[] @relation("user")
+  Report2 Report[] @relation("user2")
   Family_Admin Family_Admin?
 }
 
@@ -72,7 +74,7 @@ model Picture{
   family_member Family_member?
 }
 
-model Report {
+model iData {
 	id			Int			@id @default(autoincrement())
 	lost_num		Int
 	location		String		@db.VarChar(255)
@@ -85,4 +87,15 @@ model Feed {
 	content	String
 	pic 			Picture		@relation(fields: [picture_id],references: [id] )
 	picture_id Int
+}
+model Report{
+  id Int @id @default(autoincrement())
+  user User @relation("user", fields: [user_id], references: [id])
+  user2 User @relation("user2", fields: [targeted_user_id], references: [id])
+  user_id Int
+  targeted_user_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  Latitude String
+  Longitude String
 }
