@@ -242,28 +242,29 @@ describe('Testing models', () => {
 				Latitude: '30.0',
 				Longitude: '30.0',
 				member_id: 1,
-				status:Status.active
+				status: Status.active
 			});
 			expect(res).toEqual({
+				id: 1,
 				user_id: 1,
 				targeted_user_id: 3,
 				Latitude: '30.0',
 				Longitude: '30.0',
 				member_id: 1,
-				status:Status.active
+				status: Status.active
 			});
 		});
 		it('Testing Getting report', async () => {
 			const res = await report.getReport(1);
-			console.log(res);
 			expect(res).toEqual(
 				{
+					id: 1,
 					user_id: 1,
 					targeted_user_id: 3,
 					Latitude: '30.0',
 					Longitude: '30.0',
 					member_id: 1,
-					status:Status.active,
+					status: Status.active,
 					user: {
 						phone: 'number2',
 						email: 'test@test.com',

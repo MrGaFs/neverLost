@@ -24,7 +24,6 @@ const memberSchema = Joi.object({
 
 const createFamilyAdmin = async (req: express.Request, res: express.Response) => {
 	try {
-		console.log('hello word');
 		await adminSchema.validateAsync(req.body);
 		const ret = await fAdmin.createFamilyAdmin(req.body);
 		res.status(200).json(ret);

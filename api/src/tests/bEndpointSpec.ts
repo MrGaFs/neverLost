@@ -4,7 +4,6 @@ import app from '../server';
 import config from '../config';
 import path from 'path';
 import fs from 'fs';
-import e from 'express';
 
 const request = supertest(app);
 
@@ -106,11 +105,10 @@ describe('Testing Main api page', () => {
 		it('Testing POST /picture', async () => {
 			const res = await request
 				.post('/picture')
-				.set('Content-Type', `multipart/form-data`)
+				.set('Content-Type', 'multipart/form-data')
 				.field('user_id', 7)
 				.attach('picture', fs.readFileSync(path.resolve('./src/tests/pic2.jpg')), 'pic2.jpg');
 			expect(res.status).toBe(200);
-			console.log(res.body);
 		});
 		it('Testing GET /picture/:id', async () => {
 			const res = await request
@@ -124,11 +122,10 @@ describe('Testing Main api page', () => {
 			const res = await request.post('/family/admin')
 				.set('authorization', `Bearer ${jwtToken}`)
 				.send({
-				user_id: 7,
-				membersCount: 3,
-				picture_id: 3,
-			});
-			// console.log(res.body);
+					user_id: 7,
+					membersCount: 3,
+					picture_id: 3,
+				});
 			expect(res.body).toEqual({
 				id: 3,
 				user_id: 7,
@@ -138,7 +135,7 @@ describe('Testing Main api page', () => {
 			});
 		});
 
-		let adminjwttoken = jwt.sign({
+		const adminjwttoken = jwt.sign({
 			id: 7,
 		}, config.JWT_SECRET);
 		it('Testing GET /family/admin', async () => {
@@ -154,11 +151,11 @@ describe('Testing Main api page', () => {
 		});
 		it('Testing PUT /family/admin', async () => {
 			const res = await request
-			.put('/family/admin')
-			.set('authorization', `Bearer ${adminjwttoken}`)
-			.send({
-				membersCount: 2,
-			});
+				.put('/family/admin')
+				.set('authorization', `Bearer ${adminjwttoken}`)
+				.send({
+					membersCount: 2,
+				});
 			expect(res.body).toEqual({
 				id: 3,
 				user_id: 7,
@@ -167,7 +164,7 @@ describe('Testing Main api page', () => {
 				picture_id: 3,
 			});
 		});
-		let testToken = jwt.sign({
+		const testToken = jwt.sign({
 			id: 3,
 		}, config.JWT_SECRET);
 		it('Testing GET with already intiated account /family/admin', async () => {
@@ -175,9 +172,8 @@ describe('Testing Main api page', () => {
 				.get('/family/admin')
 				.set('authorization', `Bearer ${testToken}`);
 			expect(res.status).toBe(200);
-			// console.log(res.body);
 		});
-	})
+	});
 
 	describe('Testing Family Members', () => {
 		it('Testing POST /family/members', async () => {
@@ -191,7 +187,6 @@ describe('Testing Main api page', () => {
 					picture_id: 2,
 				});
 			expect(res.status).toBe(200);
-			// console.log(res.body);
 		});
 		it('Testing PUT /family/members', async () => {
 			const res = await request.put('/family/members')
@@ -210,5 +205,5 @@ describe('Testing Main api page', () => {
 				picture_id: 2,
 			});
 		});
-	})
+	});
 });

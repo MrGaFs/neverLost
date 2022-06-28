@@ -17,6 +17,7 @@ type report = {
 };
 
 const returnedData = {
+	id: true,
 	user_id: true,
 	targeted_user_id: true,
 	Latitude: true,
@@ -46,6 +47,20 @@ class Report {
 	public async createReport(report: report) {
 		return await prisma.create({
 			data: report,
+			select: returnedData,
+		});
+	}
+	public async updateStatus(id: number, data: { status: Status }) {
+		return await prisma.update({
+			where: { id: id },
+			data: data,
+			select: returnedData,
+		});
+	}
+
+	public async getActiveReports(targeted_user_id: number) {
+		return await prisma.findMany({
+			where: { targeted_user_id: targeted_user_id, status: Status.active },
 			select: returnedData,
 		});
 	}
