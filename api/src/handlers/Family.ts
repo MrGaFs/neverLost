@@ -88,8 +88,8 @@ const FamilyRouter = (app: express.Application) => {
 	//family admin
 	app.get('/family/admin', jwtAuth, getFamilyAdmin);
 	app.put('/family/admin', jwtAuth, updateFamilyAdmin);
-	app.post('/family/admin', createFamilyAdmin);
-	app.post('/family/members', addFamilyMember);
-	app.put('/family/members', updateFamilyMember);
+	app.post('/family/admin', jwtAuth, createFamilyAdmin);
+	app.post('/family/members', jwtAuth, addFamilyMember);
+	app.put('/family/members', jwtAuth, updateFamilyMember);
 };
 export default FamilyRouter;

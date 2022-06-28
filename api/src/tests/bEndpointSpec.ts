@@ -121,7 +121,9 @@ describe('Testing Main api page', () => {
 
 	describe('Testing Family Admin', () => {
 		it('Testing POST /family/admin', async () => {
-			const res = await request.post('/family/admin').send({
+			const res = await request.post('/family/admin')
+				.set('authorization', `Bearer ${jwtToken}`)
+				.send({
 				user_id: 7,
 				membersCount: 3,
 				picture_id: 3,
@@ -180,6 +182,7 @@ describe('Testing Main api page', () => {
 	describe('Testing Family Members', () => {
 		it('Testing POST /family/members', async () => {
 			const res = await request.post('/family/members')
+				.set('authorization', `Bearer ${jwtToken}`)
 				.send({
 					family_admin_id: 3,
 					medical_record: 'testing post api',
@@ -188,10 +191,11 @@ describe('Testing Main api page', () => {
 					picture_id: 2,
 				});
 			expect(res.status).toBe(200);
-			console.log(res.body);
+			// console.log(res.body);
 		});
 		it('Testing PUT /family/members', async () => {
 			const res = await request.put('/family/members')
+				.set('authorization', `Bearer ${jwtToken}`)
 				.send({
 					id: 2,
 					medical_record: 'testing put api',
