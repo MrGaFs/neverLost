@@ -4,7 +4,7 @@ import config from '../config';
 import FamilyAdmin from '../models/FamilyAdmin';
 import Picture from '../models/Picture';
 import FamilyMember from '../models/FamilyMembers';
-import Report from '../models/report';
+import Report, { Status } from '../models/report';
 
 describe('Testing models', () => {
 	describe('Testing Users model', () => {
@@ -241,12 +241,16 @@ describe('Testing models', () => {
 				targeted_user_id: 3,
 				Latitude: '30.0',
 				Longitude: '30.0',
+				member_id: 1,
+				status:Status.active
 			});
 			expect(res).toEqual({
 				user_id: 1,
 				targeted_user_id: 3,
 				Latitude: '30.0',
 				Longitude: '30.0',
+				member_id: 1,
+				status:Status.active
 			});
 		});
 		it('Testing Getting report', async () => {
@@ -258,6 +262,8 @@ describe('Testing models', () => {
 					targeted_user_id: 3,
 					Latitude: '30.0',
 					Longitude: '30.0',
+					member_id: 1,
+					status:Status.active,
 					user: {
 						phone: 'number2',
 						email: 'test@test.com',
