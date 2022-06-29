@@ -187,6 +187,7 @@ describe('Testing Main api page', () => {
 					picture_id: 2,
 				});
 			expect(res.status).toBe(200);
+			console.log(res.body);
 		});
 		it('Testing PUT /family/members', async () => {
 			const res = await request.put('/family/members')
@@ -204,6 +205,13 @@ describe('Testing Main api page', () => {
 				email: 'fmputapi@test.1net',
 				picture_id: 2,
 			});
+		});
+	});
+	describe('Testing QrCode', () => {
+		it('Testing GET /family/members/qrcode', async () => {
+			const res = await request.get('/family/members/qrcode/2')
+				.set('authorization', `Bearer ${jwtToken}`);
+			expect(res.status).toBe(200);
 		});
 	});
 });

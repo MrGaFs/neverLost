@@ -2,7 +2,7 @@
 updateAll.sh
 
 node_modules/
-
+testingQR/
 .env
 
 setenv.sh

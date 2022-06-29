@@ -96,6 +96,15 @@ CREATE TABLE "Report" (
     CONSTRAINT "Report_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "QrCode" (
+    "id" SERIAL NOT NULL,
+    "member_id" INTEGER NOT NULL,
+    "path" TEXT NOT NULL,
+
+    CONSTRAINT "QrCode_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
@@ -119,6 +128,9 @@ CREATE UNIQUE INDEX "Family_member_picture_id_key" ON "Family_member"("picture_i
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Feed_picture_id_key" ON "Feed"("picture_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "QrCode_member_id_key" ON "QrCode"("member_id");
 
 -- AddForeignKey
 ALTER TABLE "Family_Admin" ADD CONSTRAINT "Family_Admin_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -146,3 +158,6 @@ ALTER TABLE "Report" ADD CONSTRAINT "Report_targeted_user_id_fkey" FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE "Report" ADD CONSTRAINT "Report_member_id_fkey" FOREIGN KEY ("member_id") REFERENCES "Family_member"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "QrCode" ADD CONSTRAINT "QrCode_member_id_fkey" FOREIGN KEY ("member_id") REFERENCES "Family_member"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
