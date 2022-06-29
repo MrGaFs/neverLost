@@ -37,11 +37,13 @@ class FamilyMember {
 			select: {
 				...returnedData,
 				QrCode: {
-					select:{id:true}
+					select:{id:true,
+						member_id: true,
+						path: true,}
 				}
 			},
 		});
-		const qrcode_id = qr.createQrCode({
+		res.QrCode = await qr.createQrCode({
 			family_admin_id: res.family_admin_id,
 			member_id: res.id,
 		}, res.id);

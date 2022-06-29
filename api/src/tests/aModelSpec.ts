@@ -214,6 +214,7 @@ describe('Testing models', () => {
 		it('listing all users when empty', async () => {
 			const res = await member.getFamilyMembers(1);
 			expect(res).toEqual([]);
+			console.log(res)
 		});
 		it('Adding family member', async () => {
 			await member.addFamilyMember({
@@ -224,6 +225,7 @@ describe('Testing models', () => {
 				picture_id: 1,
 			});
 			const res = (await new FamilyAdmin().getFamilyAdmin(3))?.family_members;
+			console.log(res);
 			expect(res).toEqual([{
 				id: 1,
 				medical_record: 'test medical record',

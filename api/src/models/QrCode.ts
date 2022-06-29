@@ -22,13 +22,16 @@ class QrCode {
 		});
 	}
 	public async createQrCode(data: any, family_member_id: number) {
-		let strData = JSON.stringify(data);
-		qr.toFile(`../qrphotos/${family_member_id}.png`, strData, {}, function () {
+		const strData = JSON.stringify(data);
+		console.log(data)
+		console.log(strData);
+		qr.toFile(`./qrphotos/${family_member_id}.png`, strData, {}, function (err) {
+			if (err) throw err
 			// console.log('done')
-		});
+		  });
 		const code = {
 			member_id: family_member_id,
-			path: `../qrphotos/${family_member_id}.png`,
+			path: `./qrphotos/${family_member_id}.png`,
 		};
 		return await prisma.create({
 			data: code,
