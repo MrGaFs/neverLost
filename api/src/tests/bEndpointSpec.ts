@@ -181,6 +181,7 @@ describe('Testing Main api page', () => {
 				.set('authorization', `Bearer ${jwtToken}`)
 				.send({
 					family_admin_id: 3,
+					fmUsername: 'fmid3username',
 					medical_record: 'testing post api',
 					phone: '+201026027754',
 					email: 'fmtestapi@test.1com',
@@ -199,6 +200,7 @@ describe('Testing Main api page', () => {
 				});
 			expect(res.body).toEqual({
 				id: 2,
+				fmUsername: 'fmid3username',
 				family_admin_id: 3,
 				medical_record: 'testing put api',
 				phone: '+201026027754',

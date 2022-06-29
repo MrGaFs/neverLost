@@ -58,6 +58,7 @@ model Family_Admin{
 
 model Family_member{
   id Int @id @default(autoincrement())
+  fmUsername String @unique @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   family_admin Family_Admin @relation(fields: [family_admin_id], references: [id])

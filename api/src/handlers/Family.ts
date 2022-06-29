@@ -19,6 +19,7 @@ const adminSchema = Joi.object({
 });
 const memberSchema = Joi.object({
 	family_admin_id: Joi.number().required(),
+	fmUsername: Joi.string().required(),
 	medical_record: Joi.string(),
 	phone: Joi.string().regex(/^\+20\d{10}$/).required(),
 	email: Joi.string().required(),
