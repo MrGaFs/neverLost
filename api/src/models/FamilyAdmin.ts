@@ -25,7 +25,7 @@ class FamilyAdmin {
 			where: { user_id: user_id },
 			select: {
 				user_id: true, membersCount: true,
-				family_members: { select: { id: true, medical_record: true, phone: true, email: true, picture_id: true, QrCode:{ select: {id: true}} } },
+				family_members: { select: { id: true, fmUsername: true, medical_record: true, phone: true, email: true, picture_id: true, QrCode:{ select: {id: true}} } },
 				picture_id: true
 			},
 		});

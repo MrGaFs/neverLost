@@ -218,6 +218,7 @@ describe('Testing models', () => {
 		});
 		it('Adding family member', async () => {
 			await member.addFamilyMember({
+				fmUsername: 'testusername',
 				family_admin_id: 1,
 				medical_record: 'test medical record',
 				phone: '0101010101',
@@ -228,6 +229,7 @@ describe('Testing models', () => {
 			console.log(res);
 			expect(res).toEqual([{
 				id: 1,
+				fmUsername: 'testusername',
 				medical_record: 'test medical record',
 				phone: '0101010101',
 				email: 'test@test.com',

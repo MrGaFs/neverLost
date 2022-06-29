@@ -3,6 +3,7 @@ const prisma = new PrismaClient().family_member;
 import Qr from './QrCode';
 const qr = new Qr();
 type family_member = {
+	fmUsername: string;
 	family_admin_id: number;
 	medical_record: string;
 	phone: string;
@@ -11,6 +12,7 @@ type family_member = {
 };
 const returnedData = {
 	id: true,
+	fmUsername: true,
 	family_admin_id: true,
 	medical_record: true,
 	phone: true,
